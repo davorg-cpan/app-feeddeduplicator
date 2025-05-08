@@ -2,4 +2,6 @@
 use v5.38;
 use App::FeedDeduplicator;
 
-App::FeedDeduplicator->run(shift);
+my $config_file = shift;
+my $deduplicator = App::FeedDeduplicator->new($config_file ? (config_file => $config_file) : ());
+$deduplicator->run();

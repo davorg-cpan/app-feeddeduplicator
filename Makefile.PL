@@ -1,7 +1,7 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME         => 'App::FeedDeduplicator',
-    VERSION      => '0.01',
+    VERSION_FROM => 'lib/App/FeedDeduplicator.pm',
     LICENSE      => 'perl',
     EXE_FILES    => ['bin/feed-deduplicator'],
     PREREQ_PM    => {
