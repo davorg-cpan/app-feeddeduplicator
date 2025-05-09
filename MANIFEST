@@ -1,5 +1,3 @@
-App-FeedDeduplicator-0.01/META.json
-App-FeedDeduplicator-0.01/META.yml
 bin/feed-deduplicator
 lib/App/FeedDeduplicator.pm
 lib/App/FeedDeduplicator/Aggregator.pm
@@ -10,3 +8,4 @@ MANIFEST			This list of files
 README.md
 share/sample-config.json
 t/basic.t
+Changes.md
