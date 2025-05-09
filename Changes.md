@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.3.0] - 2025-05-09
+
+### Fixed
+
+- Actually, we need Perl 5.40
+
 ## [0.2.0] - 2025-05-09
 
 ### Fixed

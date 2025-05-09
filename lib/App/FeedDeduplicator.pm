@@ -52,11 +52,11 @@ It creates instances of the Aggregator, Deduplicator, and Publisher classes and 
 
 package App::FeedDeduplicator;
 
-use v5.38;
+use v5.40;
 use feature 'class';
 no warnings 'experimental::class';
 
-our $VERSION = '0.2.0';
+our $VERSION = '0.3.0';
 
 class App::FeedDeduplicator {
     use App::FeedDeduplicator::Aggregator;
