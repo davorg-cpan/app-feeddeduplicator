@@ -90,21 +90,15 @@ class App::FeedDeduplicator::Deduplicator {
     for my $entry (@$entries) {
       # warn ref($entry) . "\n" . ref($entry->{entry}) . "\n";
       my $canonical = $self->find_canonical($entry->{entry});
-      my $key = $canonical // $entry->title;
+      my $title = $canonical // $entry->{entry}->title;
 
-      warn $entry->{entry}->link, " - $key\n";
+      push @result, $entry unless $seen{$canonical} or $seen{$title};
 
-      if ($seen{$key}++) {
-#       say "Seen";
-        next;
-      } else {
-#       say "Not seen";
-      }
-        push @result, $entry;
+      ++$seen{$canonical};
+      ++$seen{$title};
     }
 
     $deduplicated = \@result;
-    say $_->{entry}->title for @result;
   }
 
   method find_canonical ($entry) {
@@ -114,10 +108,13 @@ class App::FeedDeduplicator::Deduplicator {
     my $response = $ua->get($link);
     return unless $response->is_success;
 
-    my $tree = HTML::TreeBuilder::XPath->new_from_content($response->decoded_content);
+    my $tree = HTML::TreeBuilder::XPath->new_from_content(
+      $response->decoded_content
+    );
     my $node = $tree->findnodes('//link[@rel="canonical"]')->[0];
 
-    return $node ? URI->new($node->attr('href'))->as_string : undef;
+    return unless $node;
+    return URI->new($node->attr('href'))->as_string;
   }
 }
 

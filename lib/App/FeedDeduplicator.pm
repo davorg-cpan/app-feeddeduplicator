@@ -77,7 +77,7 @@ use v5.40;
 use feature 'class';
 no warnings 'experimental::class';
 
-our $VERSION = '0.3.1';
+our $VERSION = '0.4.0';
 
 class App::FeedDeduplicator {
   use App::FeedDeduplicator::Aggregator;
