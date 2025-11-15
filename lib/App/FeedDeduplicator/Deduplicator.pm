@@ -89,13 +89,15 @@ class App::FeedDeduplicator::Deduplicator {
 
     for my $entry (@$entries) {
       # warn ref($entry) . "\n" . ref($entry->{entry}) . "\n";
-      my $canonical = $self->find_canonical($entry->{entry});
-      my $title = $canonical // $entry->{entry}->title;
+      my $canonical = $self->find_canonical($entry->{entry}) // '';
+      my $title = $entry->{entry}->title // '';
 
-      push @result, $entry unless $seen{$canonical} or $seen{$title};
+      push @result, $entry
+        unless ($canonical and $seen{$canonical})
+            or ($title     and $seen{$title});
 
-      ++$seen{$canonical};
-      ++$seen{$title};
+      ++$seen{$canonical} if $canonical;
+      ++$seen{$title}     if $title;
     }
 
     $deduplicated = \@result;
